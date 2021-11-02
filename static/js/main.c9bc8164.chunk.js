@@ -1,0 +1,2 @@
+(this["webpackJsonpsensidev-project"]=this["webpackJsonpsensidev-project"]||[]).push([[0],{11:function(e,t,n){"use strict";n.r(t);var c=n(1),s=n.n(c),r=n(3),i=n.n(r),o=(n(8),n(9),n(0));var p=function(){return Object(o.jsx)("div",{className:"App"})};i.a.render(Object(o.jsx)(s.a.StrictMode,{children:Object(o.jsx)(p,{})}),document.getElementById("root"))},8:function(e,t,n){},9:function(e,t,n){}},[[11,1,2]]]);
+//# sourceMappingURL=main.c9bc8164.chunk.js.map
