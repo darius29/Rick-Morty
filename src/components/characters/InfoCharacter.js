@@ -1,23 +1,27 @@
 import React, {useState ,useEffect} from 'react'
 import axios from 'axios';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 
 
-
-
-function InfoCaracter({props}) {
+function InfoCaracter() {
     
   const [items, setItems] = useState([])
   const [location, setLocation] = useState([])
   const [episode, setEpisode] = useState([])
   const [id, setId] = useState(1)
+  const [origin, setOrigin] = useState([])
+  
+  
   useEffect(() => {
     axios
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
+        
         setItems(res.data);
-        console.log("Response:", res);
-        setId(res.data.id);
+        setOrigin(res.data.origin)
+   
       })
       .catch(err => {
         console.log(err.message);
@@ -29,29 +33,31 @@ function InfoCaracter({props}) {
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
         setLocation(res.data.location);
-        console.log("location", res.data.location)
       })
       .catch(err => {
         console.log(err.message);
       });
   }, [id]);
 
-  useEffect(() => {
+
+   useEffect(() => {
     axios
-      .get(`https://rickandmortyapi.com/api/character/${id}`)
+      .get(`https://rickandmortyapi.com/api/episode/${id}`)
       .then(res => {
-        setEpisode(res.data.episode)
-        console.log("episode", res.data.episode)
+        setEpisode(res.data.name)
+        
       })
       .catch(err => {
         console.log(err.message);
       });
   }, [id]);
 
+  
   return (
     
+    <SoloCharWrapper>
       
-      <div className='cards-center'>
+    <CharCard>
 
       <div className="card-info">
         <div className="card-header-info">
@@ -70,27 +76,60 @@ function InfoCaracter({props}) {
             </p>
 
             <p className='gender'>
-                Genul: 
-                  <p className='gender-text'> 
+                Gender: 
+                  <span className={items.gender === 'Male' ? 'gender-text-male' : items.gender==='Female' ? 'gender-text-female' : 'gender-text-other'}> 
                     {items.gender}
-                  </p>
+                  </span>
             </p>
+
+            <p>
+              Origin: {origin.name}
+            </p>
+
             <p>
                 Location: {location.name}
             </p>
             <p className='episode'>
                 Episode: {episode}
             </p>
+
         </div>
+
     </div>
+    
+    <div>
+      <Link to='/'>
+        <button className='btn-prev' >
+              Back
+            </button>
+      </Link>
     </div>
-        
-     
+
+    </CharCard>
+    </SoloCharWrapper>
   );
-
-
 }
 
-
-
 export default InfoCaracter
+
+const SoloCharWrapper = styled.div`
+margin-top: 10px;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    border-radius: 15px;
+    filter: drop-shadow(0.1rem 0.1rem 0.25rem darkslategray);
+  }
+`;
+
+const CharCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #258e8e;
+  width: 50vw;
+  border-radius: 15px;
+  filter: drop-shadow(0.2rem 0.2rem 0.5rem darkblue);
+ 
+`;

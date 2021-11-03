@@ -1,12 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Link} from "react-router-dom";
 
 const CharacterItem = ({ item }) => {
 
     return (
     
     <div>
-        
+     <Link className='link' to="/character/{id}">   
     <div className="card">
         <div className="card-header">
             <img src={item.image} alt='img' />
@@ -18,12 +18,9 @@ const CharacterItem = ({ item }) => {
             <p>
                 Status:  {item.status}
             </p>
-            <p>
-                Id: {item.id}
-            </p>
-        </div>
-        
+        </div>  
     </div>
+    </Link>
     </div>
   
       
