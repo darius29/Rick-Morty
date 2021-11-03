@@ -14,7 +14,7 @@
  import Dropdown from './components/ui/DropDown';
 import InfoCaracter from './components/characters/InfoCharacter';
  
- function App(props) {
+ function App() {
    
    const [items, setItems] = useState([])
    const [info, setInfo] = useState([])
