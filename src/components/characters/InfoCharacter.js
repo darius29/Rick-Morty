@@ -2,7 +2,7 @@ import React, {useState ,useEffect} from 'react'
 import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom'
 
 
 function InfoCaracter() {
@@ -10,7 +10,7 @@ function InfoCaracter() {
   const [items, setItems] = useState([])
   const [location, setLocation] = useState([])
   const [episode, setEpisode] = useState([])
-  const [id, setId] = useState(1)
+  const { id } = useParams();
   const [origin, setOrigin] = useState([])
   
   
@@ -18,10 +18,13 @@ function InfoCaracter() {
     axios
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
-        
         setItems(res.data);
+        //console.log("Response:", res.data);
+        
         setOrigin(res.data.origin)
-   
+       // console.log("origin", res.data.origin)
+        
+      
       })
       .catch(err => {
         console.log(err.message);
@@ -33,18 +36,19 @@ function InfoCaracter() {
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
         setLocation(res.data.location);
+       // console.log("location", res.data.location)
       })
       .catch(err => {
         console.log(err.message);
       });
   }, [id]);
 
-
    useEffect(() => {
     axios
       .get(`https://rickandmortyapi.com/api/episode/${id}`)
       .then(res => {
         setEpisode(res.data.name)
+        console.log("episode", res.data.name)
         
       })
       .catch(err => {
@@ -53,17 +57,17 @@ function InfoCaracter() {
   }, [id]);
 
   
+
   return (
     
     <SoloCharWrapper>
-      
-    <CharCard>
+   
+      <CardInfo>
 
-      <div className="card-info">
         <div className="card-header-info">
             <img src={items.image} alt='img' />
         </div>
-        <div className="card-body-info">
+        <CardBodyInfo>
             <h4>
                 Name: {items.name}
             </h4>
@@ -72,7 +76,7 @@ function InfoCaracter() {
             </p>
 
             <p> 
-                Specia:  {items.species}
+                Species:  {items.species}
             </p>
 
             <p className='gender'>
@@ -93,27 +97,59 @@ function InfoCaracter() {
                 Episode: {episode}
             </p>
 
-        </div>
-
-    </div>
+          </CardBodyInfo>
+      
+        
     
-    <div>
-      <Link to='/'>
-        <button className='btn-prev' >
-              Back
-            </button>
-      </Link>
-    </div>
+     
 
-    </CharCard>
-    </SoloCharWrapper>
+      </CardInfo>
+
+      <div>
+        <Link to='/'>
+          <button className='btn-back' >
+                Back
+              </button>
+        </Link>
+      </div>
+      </SoloCharWrapper>
+     
   );
+
+
 }
+
+
 
 export default InfoCaracter
 
+const CardInfo = styled.div`
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 550px;
+    height: 600px;
+    justify-content: center;
+    align-items: center; 
+  
+`;
+
+const CardBodyInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+    padding: 10px;
+    min-height: 250px;
+    font-size: 25px;
+  
+`;
+
+
 const SoloCharWrapper = styled.div`
-margin-top: 10px;  
+  margin-top: 10px;  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,15 +157,4 @@ margin-top: 10px;
     border-radius: 15px;
     filter: drop-shadow(0.1rem 0.1rem 0.25rem darkslategray);
   }
-`;
-
-const CharCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #258e8e;
-  width: 50vw;
-  border-radius: 15px;
-  filter: drop-shadow(0.2rem 0.2rem 0.5rem darkblue);
- 
 `;

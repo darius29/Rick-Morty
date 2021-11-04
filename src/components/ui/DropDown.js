@@ -1,14 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-const Dropdown = ({getStats}) => {
-    const [status, setStats] = useState('')
+const Dropdown = ({getStatus}) => {
     
-    const onSubmit = item => {
-        if(!item.status && item.gender){
-            setStats({value: item.target.value})
-        }
-    }
-
     return (
         <section className='search'>
             <div className='search-form'>
@@ -41,7 +34,6 @@ const Dropdown = ({getStats}) => {
               className='submit-button'
               type='submit'
               value='Submit'
-              onSubmit={(s) => onSubmit(s.target.value)}
               >
               </input>
           </form>

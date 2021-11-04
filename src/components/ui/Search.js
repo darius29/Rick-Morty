@@ -19,6 +19,7 @@ const Search = ({getQuery}) => {
                 placeholder='Search characters'
                 value={text}
                 onChange={(e) => onChange(e.target.value)}
+                // onChange={(e) => debounce(() => onChange(e.target.value), 3000)} 
                 autoFocus
                 />
             </form>

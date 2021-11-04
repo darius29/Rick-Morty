@@ -1,5 +1,7 @@
-
  import React, { useState, useEffect } from 'react';
+ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+ import axios from 'axios';
+ import styled from 'styled-components';
 
  import './App.css';
  
@@ -7,13 +9,9 @@
  import Character from './components/characters/Character';
  import Search from './components/ui/Search';
  
- 
- import axios from 'axios';
- import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
- 
  import Dropdown from './components/ui/DropDown';
 import InfoCaracter from './components/characters/InfoCharacter';
- 
+  
  function App() {
    
    const [items, setItems] = useState([])
@@ -21,23 +19,22 @@ import InfoCaracter from './components/characters/InfoCharacter';
    const [isLoading, setIsLoading] = useState(true)
    const [query, setQuery]=useState('')
    const [page, setPage] = useState(1)
-   const [id, setId] = useState()
    const [status, setStatus] = useState()
-   
+ 
    useEffect(() => {
      const fetchItems = async () => {
-       const result = await axios(`https://rickandmortyapi.com/api/character?name=${query}&page=${page}&id=${id}`)
+       const result = await axios(`https://rickandmortyapi.com/api/character?name=${query}&page=${page}`)
    
        setItems(result.data.results)
        setInfo(result.data.info)
-       
+     
        
        setIsLoading(false)
      }
  
      fetchItems()
-   }, [query, page, id ])
- 
+   }, [query, page ])
+
    const nextHandler = (event) => {
      event.preventDefault()
      if(page <= info.pages) {
@@ -58,7 +55,7 @@ import InfoCaracter from './components/characters/InfoCharacter';
  
    return (
  
-   <div className='container'>
+   <Container>
    
      <Router>
        <Switch>
@@ -67,33 +64,59 @@ import InfoCaracter from './components/characters/InfoCharacter';
            
            <Search getQuery={(q) =>setQuery(q) } />
            
-           <Dropdown getStats={(s) => setStatus(s) } />
+           <Dropdown getStatus={(s) => setStatus(s) } />
            <Character isLoading={isLoading} items={items} />
-           <div className='pagination'>
+          <Page>
  
              <button className='btn-prev'
              onClick={(event) => prevHandler(event)}
              >
                Prev
              </button>
-             <p className='number-page'>{page}/{info.pages}</p>
+             <NumberPage>
+               {page}/{info.pages}
+             </NumberPage>
              <button className='btn-next'
              onClick={(event) => nextHandler(event)}
              >
              Next
              </button>
-           </div>
+             </Page>
          </Route>
-          <Route path='/character/{id}'>
+          <Route path='/character/:id'>
            <Header />
            <InfoCaracter key={items.id} items={items} />
          </Route>
        </Switch>
      </Router>
    
-   </div>
+   </Container>
  )
  }
  
  export default App;
+ 
+ const Page = styled.div`
+     display: flex;
+     justify-content: center;
+     padding: 8px 16px;
+     margin-top: 10px;
+     margin-bottom: 50px;
+   
+ `;
+ 
+ const NumberPage = styled.div`
+     font-size: 30px;
+     margin-left: 10px;
+     margin-right: 10px;
+     margin-bottom: 10px;
+   
+ `;
+
+ const Container = styled.div`
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+  
+`;
  
