@@ -18,13 +18,10 @@ function InfoCaracter() {
     axios
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
+        
         setItems(res.data);
-        //console.log("Response:", res.data);
-        
         setOrigin(res.data.origin)
-       // console.log("origin", res.data.origin)
-        
-      
+
       })
       .catch(err => {
         console.log(err.message);
@@ -36,7 +33,6 @@ function InfoCaracter() {
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(res => {
         setLocation(res.data.location);
-       // console.log("location", res.data.location)
       })
       .catch(err => {
         console.log(err.message);
@@ -48,8 +44,6 @@ function InfoCaracter() {
       .get(`https://rickandmortyapi.com/api/episode/${id}`)
       .then(res => {
         setEpisode(res.data.name)
-        console.log("episode", res.data.name)
-        
       })
       .catch(err => {
         console.log(err.message);

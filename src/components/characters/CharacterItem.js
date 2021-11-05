@@ -16,7 +16,6 @@ const CharacterItem = ({ item  }) => {
                 </div>
             </CardHeader>
             <CardBody>
-
                 <h4>
                     Name: {item.name}
                 </h4>

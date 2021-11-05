@@ -8,17 +8,13 @@ const Character = ({ items, isLoading }) => {
   return isLoading ? (
    <Spinner />
   ) : (
-    <div>
-
+  
     <Cards>
 
       {items.map((item) => (
         <CharacterItem key={item.id} item={item}></CharacterItem>
         ))}
     </Cards>
-    
-
-    </div>
     
   )
 }
