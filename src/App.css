@@ -1,38 +1,152 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body{
+  background: url('Assets/bg.jfif')  center center/cover fixed;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.center {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+header {
+  height: 200px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header img {
+  width: 600px;
 }
+
+.card-header img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-header-info img {
+  width: 100%;
+  height: 300px;
+}
+
+.gender{
+  display: flex;
+}
+
+.gender-text-male{
+  background-color: blue; 
+    border-radius: 20px; 
+    width: auto; 
+    height: auto;
+    padding: 5px 20px 5px 20px; 
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.gender-text-female{
+  background-color: red; 
+    border-radius: 20px; 
+    width: auto; 
+    height: auto;
+    padding: 5px 10px 5px 10px; 
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.gender-text-other{
+  background-color: green; 
+    border-radius: 20px; 
+    width: auto; 
+    height: auto;
+    padding: 5px 10px 5px 10px; 
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.episode{
+  display:flex;
+  flex-direction: column;
+}
+
+.search {
+  height: 100px;
+}
+
+input[type='text'] {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  padding: 10px;
+  font-size: 20px;
+  border: 0;
+  border-radius: 5px;
+  width: 45%;
+  margin: auto;
+  outline: none;
+}
+
+.btn-prev{
+  background-image: linear-gradient(to bottom, #00dfeb, #01abc0);
+  color: black;
+  font-size: 15px;
+  padding: 8px 16px;
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+}
+
+.btn-next{
+  background-image: linear-gradient(to bottom, #00dfeb, #01abc0);
+  color: black;
+  padding: 8px 16px;
+  font-size: 15px;
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+}
+
+.btn-back{
+  background-image: linear-gradient(to bottom, #00dfeb, #01abc0);
+  color: black;
+  font-size: 15px;
+  padding: 8px 16px;
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+  margin: 20px;
+  
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+}
+
+.form-field {
+  width: 12rem;
+  margin: 0.5rem;
+  font-size: 16px;
+}
+
+.submit-button {
+  grid-column: 1 / span 2;
+  font-size: 1rem;
+  width: 7rem;
+  height: 2rem;
+  margin-top: 1rem;
+  border-radius: 0.75rem;
+  border: solid 2px #000000;
+  background-image: linear-gradient(to bottom, #00dfeb, #01abc0);
+}
+
