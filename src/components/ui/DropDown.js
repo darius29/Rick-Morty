@@ -1,45 +1,36 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
 
-const Dropdown = ({getStatus}) => {
-    
-    return (
-        <section className='search'>
-            <div className='search-form'>
-          <form className='form'>
-            <label className='form-label'>Status</label>
-            <select
-              className='form-field'
-              type='dropdown'
-              name='status'
-              
-              >
-              <option value=''>None</option>
-              <option value='alive'>Alive</option>
-              <option value='dead'>Dead</option>
-              <option value='unknown'>Unknown</option>
-            </select>
-            <label className='form-label'>Gender</label>
-            <select
-              className='form-field'
-              type='dropdown'
-              name='gender'
-              >
-              <option value=''>None</option>
-              <option value='female'>Female</option>
-              <option value='male'>Male</option>
-              <option value='genderless'>Genderless</option>
-              <option value='unknown'>Unknown</option>
-            </select>    
-            <input
-              className='submit-button'
-              type='submit'
-              value='Submit'
-              >
-              </input>
-          </form>
-        </div>
-        </section>
-    )
-}
+const Dropdown = ({ getStatus, getGender }) => {
+  return (
+    <DropdownContainer>
+      <Select onChange={(e) => getStatus(e.target.value)}>
+        <option value="">All Statuses</option>
+        <option value="alive">Alive</option>
+        <option value="dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </Select>
+      <Select onChange={(e) => getGender(e.target.value)}>
+        <option value="">All Genders</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="genderless">Genderless</option>
+        <option value="unknown">Unknown</option>
+      </Select>
+    </DropdownContainer>
+  );
+};
 
-export default Dropdown
+export default Dropdown;
+
+const DropdownContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+`;
+
+const Select = styled.select`
+  padding: 10px;
+  font-size: 16px;
+`;

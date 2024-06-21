@@ -1,68 +1,77 @@
-import React from 'react'
-import { BrowserRouter as Router,  Link} from "react-router-dom";
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-const CharacterItem = ({ item  }) => {
+const CharacterItem = ({ item }) => {
+  return (
+    <StyledLink to={"/character/" + item.id}>
+      <Card>
+        <CardHeader>
+          <CardImage
+            src={item.image}
+            alt={item.name}
+          />
+        </CardHeader>
+        <CardBody>
+          <CardTitle>{item.name}</CardTitle>
+          <CardDetail>Status: {item.status}</CardDetail>
+          <CardDetail>Species: {item.species}</CardDetail>
+          <CardDetail>Gender: {item.gender}</CardDetail>
+        </CardBody>
+      </Card>
+    </StyledLink>
+  );
+};
 
-    return (
-    
-    
-    <Link className='link' to={"/character/"+item.id}>
+export default CharacterItem;
 
-            <Card>
-            <CardHeader>
-                <div className='card-header'>
-                <img src={item.image} alt='img' />
-                </div>
-            </CardHeader>
-            <CardBody>
-
-                <h4>
-                    Name: {item.name}
-                </h4>
-                <p>
-                    Status:  {item.status}
-                </p>
-            </CardBody>
-            </Card>
-    </Link>
-
-  )
-}
-
-export default CharacterItem
-
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 
 const Card = styled.div`
-  margin-right: 15px;
-  margin-bottom: 15px;
-  background-color: #fff;
+  background: #1e272e;
   border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  width: 200px;
-  height: 300px;
-  justify-content: center;
-  flex-direction: row;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const CardHeader = styled.div`
-    width: 100%;
-    height: 100px;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+`;
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+  ${Card}:hover & {
+    transform: scale(1.1);
+  }
 `;
 
 const CardBody = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 10px;
-    min-height: 300px;
-    color: black;
-    text-decoration: none;
-  
-  
+  padding: 15px;
+  color: #ecf0f1;
 `;
 
+const CardTitle = styled.h4`
+  font-size: 1.5rem;
+  color: #ff4757;
+  margin-bottom: 10px;
+`;
 
-
+const CardDetail = styled.p`
+  font-size: 1rem;
+  color: #dfe4ea;
+  margin: 5px 0;
+`;
